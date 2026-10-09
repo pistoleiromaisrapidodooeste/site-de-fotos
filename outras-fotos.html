@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Outras fotos</title><style>
+*{box-sizing:border-box;margin:0}
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#111;color:#eee;padding:16px}
+header{max-width:1100px;margin:0 auto 20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+h1{font-size:1.5rem}
+a{color:inherit;text-decoration:none}
+nav{position:sticky;top:0;z-index:5;background:#111;margin:-16px -16px 16px;padding:10px 16px;border-bottom:1px solid #2a2a2a;display:flex;gap:8px;overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav a{background:#222;padding:8px 14px;border-radius:999px;font-size:.9rem;flex:0 0 auto}
+nav a.ativo{background:#eee;color:#111;font-weight:600}
+.grade{max-width:1100px;margin:0 auto;display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+.grade img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:8px;display:block;background:#222;cursor:zoom-in}
+.cartoes{max-width:1100px;margin:0 auto;display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+.cartao{background:#1c1c1c;border-radius:12px;overflow:hidden;display:block}
+.cartao img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:#222}
+.cartao div{padding:10px 12px}
+.cartao b{display:block;font-size:1rem}
+.cartao span{font-size:.85rem;color:#999}
+#lb{position:fixed;inset:0;background:rgba(0,0,0,.95);display:none;align-items:center;justify-content:center;z-index:10}
+#lb.on{display:flex}
+#lb img{max-width:100%;max-height:100%;object-fit:contain}
+#lb button{position:absolute;background:rgba(255,255,255,.15);color:#fff;border:0;font-size:1.8rem;width:48px;height:48px;border-radius:50%;cursor:pointer}
+#fechar{top:12px;right:12px}#ant{left:8px;top:50%}#prox{right:8px;top:50%}
+</style></head>
+<body><nav><a href="index.html">Início</a><a href="1-ano-joao-otavio.html">1 ano Joao Otavio</a><a href="formatura.html">formatura</a><a href="fotos.html">Fotos</a><a href="fotos-novas-setembro-2019.html">FOTOS NOVAS SETEMBRO 2019</a><a href="fotos-samsun.html">FOTOS SAMSUN</a><a href="jango.html">JANGO</a><a href="rose-samsung-preto-28-06-2016.html">rose samsung preto 28 06 2016</a><a href="viagem-malta.html">Viagem malta</a><a href="viagem-usa.html">Viagem USA</a><a href="outras-fotos.html" class=ativo>Outras fotos</a></nav><header><h1>Outras fotos</h1><span>8 fotos</span></header>
+<div class="grade"><img loading="lazy" src="FOTO%20GABRIEL%20CIRCO%202_result.jpg" data-full="FOTO%20GABRIEL%20CIRCO%202_result.jpg" alt="">
+<img loading="lazy" src="FOTO%20GABRIEL%20CIRCO%203_result.jpg" data-full="FOTO%20GABRIEL%20CIRCO%203_result.jpg" alt="">
+<img loading="lazy" src="FOTO%20GABRIEL%20CIRCO%204jpg_result.jpg" data-full="FOTO%20GABRIEL%20CIRCO%204jpg_result.jpg" alt="">
+<img loading="lazy" src="FOTO%20GABRIEL%20CIRCO%205_result.jpg" data-full="FOTO%20GABRIEL%20CIRCO%205_result.jpg" alt="">
+<img loading="lazy" src="FOTO%20GABRIEL%20CIRCO_result.jpg" data-full="FOTO%20GABRIEL%20CIRCO_result.jpg" alt="">
+<img loading="lazy" src="foto%20nova_result.jpg" data-full="foto%20nova_result.jpg" alt="">
+<img loading="lazy" src="IMG_20200708_160557642_result.jpg" data-full="IMG_20200708_160557642_result.jpg" alt="">
+<img loading="lazy" src="WIN_20200708_15_29_34_Pro_result.jpg" data-full="WIN_20200708_15_29_34_Pro_result.jpg" alt=""></div>
+<div id="lb"><button id="fechar">&times;</button><button id="ant">&#8249;</button>
+<img alt=""><button id="prox">&#8250;</button></div><script>
+const imgs=[...document.querySelectorAll('.grade img')];
+const lb=document.getElementById('lb'),big=lb.querySelector('img');let i=0;
+function abrir(n){i=(n+imgs.length)%imgs.length;big.src=imgs[i].dataset.full;lb.classList.add('on')}
+imgs.forEach((im,n)=>im.addEventListener('click',()=>abrir(n)));
+document.getElementById('fechar').onclick=()=>lb.classList.remove('on');
+document.getElementById('ant').onclick=e=>{e.stopPropagation();abrir(i-1)};
+document.getElementById('prox').onclick=e=>{e.stopPropagation();abrir(i+1)};
+lb.addEventListener('click',e=>{if(e.target===lb)lb.classList.remove('on')});
+document.addEventListener('keydown',e=>{if(!lb.classList.contains('on'))return;
+ if(e.key==='Escape')lb.classList.remove('on');
+ if(e.key==='ArrowLeft')abrir(i-1);if(e.key==='ArrowRight')abrir(i+1)});
+let x0=null;lb.addEventListener('touchstart',e=>x0=e.touches[0].clientX);
+lb.addEventListener('touchend',e=>{if(x0===null)return;const d=e.changedTouches[0].clientX-x0;
+ if(Math.abs(d)>50)abrir(i+(d<0?1:-1));x0=null});
+</script></body></html>
